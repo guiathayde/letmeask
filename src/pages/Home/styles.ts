@@ -33,6 +33,10 @@ export const Container = styled.div`
       margin-top: 16px;
       color: #f8f8f8;
     }
+
+    &.dark {
+      background: #3a2182;
+    }
   }
 
   main {
@@ -43,6 +47,10 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    &.dark {
+      background: #333;
+    }
   }
 
   .main-content {
@@ -52,6 +60,12 @@ export const Container = styled.div`
     max-width: 320px;
     align-items: stretch;
     text-align: center;
+
+    .toggle-button {
+      position: absolute;
+      right: 64px;
+      top: 64px;
+    }
 
     > img {
       align-self: center;

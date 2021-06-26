@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  height: 100vh;
+
   header {
     padding: 24px;
     border-bottom: 1px solid #e2e2e2;
@@ -11,6 +13,12 @@ export const Container = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      .toggle-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
       > img {
         max-height: 45px;
@@ -40,6 +48,10 @@ export const Container = styled.div`
         font-family: 'Poppins', sans-serif;
         font-size: 24px;
         color: #29292e;
+
+        &.dark {
+          color: #f8f8f8;
+        }
       }
 
       span {
@@ -63,6 +75,15 @@ export const Container = styled.div`
         box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
         resize: vertical;
         min-height: 130px;
+
+        &.dark {
+          background: #717171;
+          color: #f8f8f8;
+
+          &::placeholder {
+            color: #f8f8f8;
+          }
+        }
       }
 
       .form-footer {
@@ -86,6 +107,10 @@ export const Container = styled.div`
             color: #29292e;
             font-weight: 500;
             font-size: 14px;
+
+            &.dark {
+              color: #f8f8f8;
+            }
           }
         }
 
@@ -110,5 +135,9 @@ export const Container = styled.div`
     .question-list {
       margin-top: 32px;
     }
+  }
+
+  &.dark {
+    background: #333;
   }
 `;

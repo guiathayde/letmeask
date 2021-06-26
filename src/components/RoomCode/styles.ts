@@ -11,6 +11,10 @@ export const Container = styled.button`
 
   display: flex;
 
+  &.dark {
+    background: #717171;
+  }
+
   div {
     height: 100%;
     background: #835afd;
@@ -28,5 +32,9 @@ export const Container = styled.button`
     width: 240px;
     font-size: 14px;
     font-weight: 500;
+
+    &.dark {
+      color: #f8f8f8;
+    }
   }
 `;

@@ -4,16 +4,20 @@ import { useHistory } from 'react-router-dom';
 import { database } from '../../services/firebase';
 
 import { useAuth } from '../../hooks/useAuth';
+import { useTheme } from '../../hooks/useTheme';
 
+import { ToggleThemeButton } from '../../components/ToggleThemeButton';
 import { Button } from '../../components/Button';
 
 import ilustrationImg from '../../assets/images/illustration.svg';
 import logoImg from '../../assets/images/logo.svg';
+import darkLogoImg from '../../assets/images/dark-logo.svg';
 import googleIconImg from '../../assets/images/google-icon.svg';
 
 import { Container } from './styles';
 
 export function Home() {
+  const { theme } = useTheme();
   const history = useHistory();
   const { user, signInWithGoogle } = useAuth();
   const [roomCode, setRoomCode] = useState('');
@@ -50,7 +54,7 @@ export function Home() {
 
   return (
     <Container>
-      <aside>
+      <aside className={theme}>
         <img
           src={ilustrationImg}
           alt="Ilustração simbolizando perguntas e respostas"
@@ -59,9 +63,12 @@ export function Home() {
         <p>Tire as dúvidas da sua audiência em tempo-real</p>
       </aside>
 
-      <main>
+      <main className={theme}>
         <div className="main-content">
-          <img src={logoImg} alt="Letmeask" />
+          <div className="toggle-button">
+            <ToggleThemeButton theme={theme} />
+          </div>
+          <img src={theme === 'light' ? logoImg : darkLogoImg} alt="Letmeask" />
           <button
             type="button"
             onClick={handleCreateRoom}

@@ -1,13 +1,19 @@
 import { FormEvent, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import cx from 'classnames';
 
 import logoImg from '../../assets/images/logo.svg';
+import darkLogoImg from '../../assets/images/dark-logo.svg';
 
 import { Button } from '../../components/Button';
 import { Question } from '../../components/Question';
 import { RoomCode } from '../../components/RoomCode';
+import { ToggleThemeButton } from '../../components/ToggleThemeButton';
+
 import { useAuth } from '../../hooks/useAuth';
 import { useRoom } from '../../hooks/useRoom';
+import { useTheme } from '../../hooks/useTheme';
+
 import { database } from '../../services/firebase';
 
 import { Container } from './styles';
@@ -17,6 +23,7 @@ type RoomParams = {
 };
 
 export function Room() {
+  const { theme } = useTheme();
   const params = useParams<RoomParams>();
   const roomId = params.id;
 
@@ -67,22 +74,26 @@ export function Room() {
   }
 
   return (
-    <Container>
+    <Container className={theme}>
       <header>
         <div className="content">
-          <img src={logoImg} alt="Letmeask" />
-          <RoomCode code={roomId} />
+          <img src={theme === 'light' ? logoImg : darkLogoImg} alt="Letmeask" />
+          <div className="toggle-button">
+            <ToggleThemeButton theme={theme} />
+            <RoomCode code={roomId} theme={theme} />
+          </div>
         </div>
       </header>
 
       <main>
         <div className="room-title">
-          <h1>Sala {title}</h1>
+          <h1 className={theme}>Sala {title}</h1>
           {questions.length > 0 && <span>{questions.length} pergunta(s)</span>}
         </div>
 
         <form onSubmit={handleSendQuestion}>
           <textarea
+            className={theme}
             placeholder="O que você quer perguntar?"
             onChange={event => setNewQuestion(event.target.value)}
             value={newQuestion}
@@ -92,7 +103,7 @@ export function Room() {
             {user ? (
               <div className="user-info">
                 <img src={user.avatar} alt={user.name} />
-                <span>{user.name}</span>
+                <span className={theme}>{user.name}</span>
               </div>
             ) : (
               <span>
@@ -115,10 +126,16 @@ export function Room() {
                 author={question.author}
                 isAnswered={question.isAnswered}
                 isHighlighted={question.isHighlighted}
+                theme={theme}
               >
                 {!question.isAnswered && (
                   <button
-                    className={`like-button ${question.likeId ? 'liked' : ''}`}
+                    className={cx(
+                      'like-button',
+                      question.likeId ? 'liked' : '',
+                      { highlighted: question.isHighlighted },
+                      theme,
+                    )}
                     type="button"
                     aria-label="Marcar como gostei"
                     onClick={() =>

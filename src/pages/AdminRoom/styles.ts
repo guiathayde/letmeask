@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  height: 100vh;
+
   header {
     padding: 24px;
     border-bottom: 1px solid #e2e2e2;
@@ -11,6 +13,12 @@ export const Container = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      .toggle-button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
 
       > img {
         max-height: 45px;
@@ -40,6 +48,10 @@ export const Container = styled.div`
         font-family: 'Poppins', sans-serif;
         font-size: 24px;
         color: #29292e;
+
+        &.dark {
+          color: #f8f8f8;
+        }
       }
 
       span {
@@ -109,6 +121,22 @@ export const Container = styled.div`
 
     .question-list {
       margin-top: 32px;
+
+      button {
+        &.dark {
+          svg path {
+            stroke: #f8f8f8;
+          }
+
+          svg circle {
+            stroke: #f8f8f8;
+          }
+        }
+      }
     }
+  }
+
+  &.dark {
+    background: #333;
   }
 `;

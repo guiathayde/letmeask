@@ -35,4 +35,9 @@ export const Container = styled.button`
     opacity: 0.6;
     cursor: not-allowed;
   }
+
+  &.dark {
+    background: #717171;
+    border: 2px solid #835afd;
+  }
 `;

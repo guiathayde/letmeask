@@ -3,14 +3,20 @@ import { Link, useHistory } from 'react-router-dom';
 
 import ilustrationImg from '../../assets/images/illustration.svg';
 import logoImg from '../../assets/images/logo.svg';
+import darkLogoImg from '../../assets/images/dark-logo.svg';
 
 import { Button } from '../../components/Button';
+
+import { ToggleThemeButton } from '../../components/ToggleThemeButton';
 import { database } from '../../services/firebase';
+
+import { useTheme } from '../../hooks/useTheme';
 import { useAuth } from '../../hooks/useAuth';
 
 import { Container } from './styles';
 
 export function NewRoom() {
+  const { theme } = useTheme();
   const { user } = useAuth();
   const history = useHistory();
   const [newRoom, setNewRoom] = useState('');
@@ -34,7 +40,7 @@ export function NewRoom() {
 
   return (
     <Container>
-      <aside>
+      <aside className={theme}>
         <img
           src={ilustrationImg}
           alt="Ilustração simbolizando perguntas e respostas"
@@ -43,10 +49,13 @@ export function NewRoom() {
         <p>Tire as dúvidas da sua audiência em tempo-real</p>
       </aside>
 
-      <main>
+      <main className={theme}>
         <div className="main-content">
-          <img src={logoImg} alt="Letmeask" />
-          <h2>Criar uma nova sala</h2>
+          <div className="toggle-button">
+            <ToggleThemeButton theme={theme} />
+          </div>
+          <img src={theme === 'light' ? logoImg : darkLogoImg} alt="Letmeask" />
+          <h2 className={theme}>Criar uma nova sala</h2>
           <form onSubmit={handleCreateRoom}>
             <input
               type="text"

@@ -6,6 +6,10 @@ export const Container = styled.div`
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   padding: 24px;
 
+  &.dark {
+    background: #717171;
+  }
+
   & + .question {
     margin-top: 8px;
   }
@@ -25,6 +29,18 @@ export const Container = styled.div`
 
   p {
     color: #29292e;
+
+    &.dark {
+      color: #f8f8f8;
+
+      &.highlighted {
+        color: #29292e;
+      }
+
+      &.answered {
+        color: #29292e;
+      }
+    }
   }
 
   footer {
@@ -47,12 +63,46 @@ export const Container = styled.div`
         margin-left: 8px;
         color: #737380;
         font-size: 14px;
+
+        &.dark {
+          color: #f8f8f8;
+
+          &.highlighted {
+            color: #29292e;
+          }
+
+          &.answered {
+            color: #29292e;
+          }
+        }
       }
     }
 
     > div {
       display: flex;
       gap: 16px;
+
+      &.dark {
+        &.highlighted {
+          svg path {
+            stroke: #29292e;
+          }
+
+          svg circle {
+            stroke: #29292e;
+          }
+        }
+
+        &.answered {
+          svg circle {
+            stroke: #29292e;
+          }
+
+          svg path {
+            stroke: #29292e;
+          }
+        }
+      }
     }
 
     button {
@@ -72,6 +122,26 @@ export const Container = styled.div`
 
           svg path {
             stroke: #835afd;
+          }
+        }
+
+        &.dark {
+          span {
+            color: #f8f8f8;
+          }
+
+          svg path {
+            stroke: #f8f8f8;
+          }
+
+          &.highlighted {
+            span {
+              color: #29292e;
+            }
+
+            svg path {
+              stroke: #29292e;
+            }
           }
         }
       }

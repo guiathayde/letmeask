@@ -9,9 +9,10 @@ type QuestionProps = {
     name: string;
     avatar: string;
   };
-  children?: ReactNode;
   isAnswered?: boolean;
   isHighlighted?: boolean;
+  children?: ReactNode;
+  theme?: 'light' | 'dark';
 };
 
 export function Question({
@@ -20,25 +21,48 @@ export function Question({
   isAnswered = false,
   isHighlighted = false,
   children,
+  theme,
 }: QuestionProps) {
   return (
     <Container
       className={cx(
         'question',
+        theme,
         { answered: isAnswered },
         { highlighted: isHighlighted && !isAnswered },
       )}
-      // className={`question ${isAnswered ? 'answered' : ''} ${
-      //   isHighlighted ? 'highlighted' : ''
-      // }`}
     >
-      <p>{content}</p>
+      <p
+        className={cx(
+          theme,
+          { answered: isAnswered },
+          { highlighted: isHighlighted && !isAnswered },
+        )}
+      >
+        {content}
+      </p>
       <footer>
         <div className="user-info">
           <img src={author.avatar} alt={author.name} />
-          <span>{author.name}</span>
+          <span
+            className={cx(
+              theme,
+              { answered: isAnswered },
+              { highlighted: isHighlighted && !isAnswered },
+            )}
+          >
+            {author.name}
+          </span>
         </div>
-        <div>{children}</div>
+        <div
+          className={cx(
+            theme,
+            { answered: isAnswered },
+            { highlighted: isHighlighted && !isAnswered },
+          )}
+        >
+          {children}
+        </div>
       </footer>
     </Container>
   );
